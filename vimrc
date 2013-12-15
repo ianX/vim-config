@@ -28,6 +28,8 @@ Bundle 'honza/vim-snippets'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
+Bundle 'tpope/vim-haml'
+
 filetype on  " after Bundle init
 filetype plugin on
 filetype indent on " required
