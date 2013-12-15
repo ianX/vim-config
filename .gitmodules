@@ -1,7 +1,60 @@
 [submodule "bundle/AutoComplPop"]                                               
-  path = bundle/AutoComplPop                                                    
-  url = git@github.com:ianX/AutoComplPop.git
-  ignore = dirty
+    path = bundle/AutoComplPop                                                    
+    url = git@github.com:ianX/AutoComplPop.git
+    ignore = dirty
+
 [submodule "bundle/L9"]                                               
-  path = bundle/L9                                                    
-  ignore = dirty
+    path = bundle/L9                                                    
+    url = https://github.com/vim-scripts/L9.git
+    ignore = dirty
+
+[submodule "bundle/bufexplorer"]
+    path = bundle/bufexplorer
+    url = https://github.com/jlanzarotta/bufexplorer.git
+    ignore = dirty
+
+[submodule "bundle/tlib_vim"]
+    path = bundle/tlib_vim
+    url = https://github.com/tomtom/tlib_vim.git
+    ignore = dirty
+
+[submodule "bundle/vim-addon-mw-utils"]
+    path = bundle/vim-addon-mw-utils
+    url = https://github.com/MarcWeber/vim-addon-mw-utils.git
+    ignore = dirty
+
+[submodule "bundle/vim-fugitive"]
+    path = bundle/vim-fugitive
+    url = https://github.com/tpope/vim-fugitive.git
+    ignore = dirty
+
+[submodule "bundle/vim-misc"]
+    path = bundle/vim-misc
+    url = https://github.com/xolox/vim-misc.git
+    ignore = dirty
+
+[submodule "bundle/vim-php-cs-fixer"]
+    path = bundle/vim-php-cs-fixer
+    url = https://github.com/stephpy/vim-php-cs-fixer.git
+    ignore = dirty
+
+[submodule "bundle/vim-session"]
+    path = bundle/vim-session
+    url = https://github.com/xolox/vim-session.git
+    ignore = dirty
+
+[submodule "bundle/vim-snipmate"]
+    path = bundle/vim-snipmate
+    url = https://github.com/garbas/vim-snipmate.git
+    ignore = dirty
+
+[submodule "bundle/vim-snippets"]
+    path = bundle/vim-snippets
+    url = https://github.com/honza/vim-snippets.git
+    ignore = dirty
+
+[submodule "bundle/vundle"]
+    path = bundle/vundle
+    url = https://github.com/gmarik/vundle.git
+    ignore = dirty
+
