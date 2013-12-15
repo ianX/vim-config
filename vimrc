@@ -20,10 +20,13 @@ Bundle 'AutoComplPop'
 Bundle 'stephpy/vim-php-cs-fixer'
 Bundle 'jlanzarotta/bufexplorer'
 " for snipmate
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'
+
+Bundle 'kien/ctrlp.vim'
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 filetype on  " after Bundle init
 filetype plugin on
@@ -91,7 +94,8 @@ set foldcolumn=0
 set formatoptions+=mM
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,sjis,euc-kr,ucs-2le,latin1 
 set laststatus=2
-set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
+"set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
+set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\<%{strftime(\"%Y-%m-%d\ %H:%M\",getftime(expand(\"%:p\")))}>\ %-8.(%)%P
 
 "IMPORTANT: win32 users will need to have 'shellslash' set so that latex
 "can be called correctly.
@@ -466,5 +470,26 @@ let g:php_cs_fixer_fixers_list = ""               " List of fixers
 let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
 let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
 let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information.
+
+" CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=.git/,.hg/,.svn/,*/tmp/*,*.so,*.swp,*.zip,.DS_Store
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|DS_Store)$',
+  \ 'link': '',
+  \ }
+let g:ctrlp_max_files = 1000
+let g:ctrlp_max_depth = 10
+"let g:ctrlp_user_command = 'find %s -type f'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+
+" powerline
+let g:Powerline_symbols = 'unicode'
+set encoding=utf-8
+set fillchars+=stl:\ ,stlnc:\
 
 let g:vimrc_loaded = 1
