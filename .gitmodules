@@ -1,0 +1,7 @@
+[submodule "bundle/AutoComplPop"]                                               
+  path = bundle/AutoComplPop                                                    
+  url = git@github.com:ianX/AutoComplPop.git
+  ignore = dirty
+[submodule "bundle/L9"]                                               
+  path = bundle/L9                                                    
+  ignore = dirty
