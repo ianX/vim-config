@@ -1,0 +1,11 @@
+Doxyfile
+.DS_Store
+.*
+*.pdf
+*.doc
+test/
+sessions/
+lib/
+tmp/
+cache/
+tools/
