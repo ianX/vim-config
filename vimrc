@@ -168,15 +168,11 @@ nnoremap ,lp :lprevious<cr>
 nnoremap ,ll :llist<cr>
 nnoremap ,lw :lw<cr>
 
-"my info
+"I know this is git _(:3」∠)_
 inoreab xdate <c-r>=strftime("%Y/%m/%d")<cr>
 inoreab xtime <c-r>=strftime("%H:%M:%S")<cr>
 inoreab xname ianX
-inoreab xlmail oldyuezi@live.com
-inoreab xymail hudongwen123@yeah.net
 inoreab xgmail oldyuezi@gmail.com
-inoreab xmmail hudongwen@meituan.com
-inoreab xqq 1172085766
 
 "code
 inoremap #in #include<space>
@@ -508,6 +504,7 @@ let g:session_autosave = 'no'
 let g:session_directory = '~/.vim/sessions/'
 let g:ianX_session_loaded = 0
 let g:ianX_session_name = ''
+let g:ianX_session_skip_autosave = 0
 " Auto Session Save/Restore
 function IanXGetProjectName()
     " Get the current editing file list, Unix only
@@ -538,6 +535,9 @@ function IanXSaveSession()
 endfunction
 
 function IanXRestoreSession()
+    if exists('g:ianX_session_skip_autosave') && g:ianX_session_skip_autosave != 0
+        return
+    endif
     if exists('g:ianX_session_loaded') && g:ianX_session_loaded != 0
         return
     endif
@@ -552,13 +552,22 @@ function IanXRestoreSession()
     let g:ianX_session_loaded = 1
 endfunction
 
+function IanXDelCurSession()
+    let session_path = expand(g:session_directory. '/'. IanXGetProjectName(). '.vim')
+    if filereadable(session_path)
+        system('rm -f '. session_path)
+    endif
+    let g:ianX_session_skip_autosave = 1
+    echo
+endfunction
+
 nmap ssa :call IanXSaveSession()
 smap SO :call IanXRestoreSession()
 autocmd VimLeave * call IanXSaveSession()
 autocmd VimEnter * call IanXRestoreSession()
 
 function IanXDebugStart()
-    execute 'profile start ~/.vim/tmp/profile.log'
+    execute 'profile start '. expand('~/.vim/tmp'). '/profile.log'
     execute 'profile func *'
     execute 'profile file *'
 endfun
