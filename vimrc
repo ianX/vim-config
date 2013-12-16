@@ -11,7 +11,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 " Bundles
@@ -29,7 +29,12 @@ Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 
 Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Bundle 'bling/vim-airline'
+"Bundle 'bling/vim-bufferline'
+Bundle 'scrooloose/syntastic'
+Bundle 'majutsushi/tagbar'
+"Bundle 'edkolev/tmuxline.vim'
 
 " FE:
 Bundle 'tpope/vim-haml'
@@ -38,11 +43,11 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'leshill/vim-json'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'groenewege/vim-less'
-"Bundle 'ap/vim-css-color'
+Bundle 'ap/vim-css-color'
 Bundle 'chrisbra/color_highlight'
 
 syntax on
-filetype on  " after Bundle init
+"filetype on  " after Bundle init
 filetype plugin indent on
 set background=dark
 
@@ -106,7 +111,7 @@ set foldlevel=100
 set foldcolumn=0
 
 set formatoptions+=mM
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,sjis,euc-kr,ucs-2le,latin1 
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,sjis,euc-kr,ucs-2le,latin1
 set laststatus=2
 "set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
 set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\<%{strftime(\"%Y-%m-%d\ %H:%M\",getftime(expand(\"%:p\")))}>\ %-8.(%)%P
@@ -115,7 +120,7 @@ set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&
 "can be called correctly.
 set shellslash
 
-"IMPORTANT 
+"IMPORTANT
 set grepprg=grep\ -nH\ $*
 
 "打开.tex文件时latex被加载
@@ -137,7 +142,7 @@ nnoremap sa :%s///gc<left><left><left><left>
 nnoremap ,q :q<cr>
 nnoremap sq :wall<cr>:qall<cr>
 nnoremap ,w :w<cr>
-nnoremap <space> @=((foldclosed(line('.'))<0)?'zc':'zo')<cr> 
+"nnoremap <space> @=((foldclosed(line('.'))<0)?'zc':'zo')<cr>
 nnoremap tn :tabnew .<cr>
 nnoremap te :tabedit<cr>
 nnoremap tc :tabclose<cr>
@@ -329,7 +334,7 @@ let g:winManagerWindowLayout = 'FileExplorer,TagsExplorer|BufExplorer'
 nnoremap wm :WMToggle<cr>
 
 "supertab
-let g:SuperTabDefaultCompletionType = '<C-X><C-U>' 
+let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
 
 "OmniCppComplete.vim
 set completeopt=menu,menuone
@@ -342,8 +347,8 @@ let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype in popup window
 let OmniCpp_GlobalScopeSearch=1 " enable the global scope search
 let OmniCpp_DisplayMode=1 " Class scope completion mode: always show all members
 let OmniCpp_DefaultNamespaces=["std"]
-let OmniCpp_ShowScopeInAbbr=1 
-let OmniCpp_ShowAccess=1 
+let OmniCpp_ShowScopeInAbbr=1
+let OmniCpp_ShowAccess=1
 
 "netrw
 let g:netrw_banner= 0
@@ -410,14 +415,14 @@ xnoremap <silent> ,v :call VisualSearch('gv')<CR>
 nnoremap ,g :vimgrep // **/*.<left><left><left><left><left><left><left>
 " Fast grep
 " 在当前文件查找光标下的单词
-nnoremap <silent> ,lv :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr>     
+nnoremap <silent> ,lv :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr>
 xnoremap <silent> ,lv :lv /<c-r>=<sid>GetVisualSelection()<cr>/ %<cr>:lw<cr>
 
 function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
     unmenu Foo
-endfunction 
+endfunction
 
 " From an idea by Michael Naumann
 function! VisualSearch(direction) range
@@ -451,6 +456,10 @@ autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
 " auto-popup
 let g:acp_behaviorSnipmateLength = 1
+let g:acp_mappingDriven = 1
+let g:acp_behaviorKeywordCommand = "\<C-n>"
+let g:acp_behaviorKeywordLength = 2
+
 " for auto-popup and snipmate
 function! GetSnipsInCurrentScope()
     let word = matchstr(getline('.'), '\S\+\%'.col('.').'c')
@@ -481,6 +490,13 @@ let g:php_cs_fixer_verbose = 0                    " Return the output of command
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_by_filename = 0
+let g:ctrlp_use_caching = 1
+let g:ctrlp_cache_dir = $HOME.'/.vim/tmp/ctrlp'
+let g:ctrlp_reuse_window = 'netrw\|help\|quickfix\|BufExplorer'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:30'
+let g:ctrlp_regexp = 1
+let g:ctrlp_max_history = &history
 set wildignore+=.git/,.hg/,.svn/,*/tmp/*,*.so,*.swp,*.zip,.DS_Store
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
@@ -490,6 +506,7 @@ let g:ctrlp_custom_ignore = {
   \ }
 let g:ctrlp_max_files = 1000
 let g:ctrlp_max_depth = 10
+let g:ctrlp_mruf_max = 250
 "let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
 
@@ -497,6 +514,77 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
 let g:Powerline_symbols = 'unicode'
 set encoding=utf-8
 set fillchars+=stl:\ ,stlnc:\
+
+" Persistent undo
+set undodir=~/.vim/cache/undodir
+set undofile
+set undolevels=200 "maximum number of changes that can be undone
+set undoreload=2000 "maximum number lines to save for undo on a buffer reload
+
+" airline
+let g:airline_powerline_fonts = 1
+let g:airline_detect_modified=1
+let g:airline_detect_paste=1
+let g:airline_detect_iminsert=0
+let g:airline_inactive_collapse=1
+let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+let g:airline#extensions#quickfix#location_text = 'Location'
+" bufferline
+let g:airline#extensions#bufferline#enabled = 0
+let g:airline#extensions#bufferline#overwrite_variables = 1
+let g:bufferline_echo = 1
+let g:bufferline_active_buffer_left = '['
+let g:bufferline_active_buffer_right = ']'
+let g:bufferline_modified = '+'
+let g:bufferline_show_bufnr = 1
+let g:bufferline_rotate = -1 " always last
+"let g:bufferline_fixed_index =  1 "always second (default)
+let g:bufferline_inactive_highlight = 'StatusLineNC'
+let g:bufferline_active_highlight = 'StatusLine'
+let g:bufferline_solo_highlight = 0
+" fugitive airline
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#empty_message = ''
+" syntastic airline
+let g:airline#extensions#syntastic#enabled = 1
+" tagbar
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#flags = ''  "default
+let g:airline#extensions#tagbar#flags = 'f'
+let g:airline#extensions#tagbar#flags = 's'
+let g:airline#extensions#tagbar#flags = 'p'
+" CtrlP airline
+let g:airline#extensions#ctrlp#color_template = 'insert' "(default)
+let g:airline#extensions#ctrlp#color_template = 'normal'
+let g:airline#extensions#ctrlp#color_template = 'visual'
+let g:airline#extensions#ctrlp#color_template = 'replace'
+let g:airline#extensions#ctrlp#show_adjacent_modes = 1
+
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#symbol = '!'
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
+let g:airline#extensions#whitespace#max_lines = 20000
+let g:airline#extensions#whitespace#show_message = 1
+let g:airline#extensions#whitespace#trailing_format = 'trailing[%s]'
+let g:airline#extensions#whitespace#mixed_indent_format = 'mixed-indent[%s]'
+
+" tumx airline
+"let g:airline#extensions#tmuxline#enabled = 1
+"let airline#extensions#tmuxline#color_template = 'normal' "(default)
+"let airline#extensions#tmuxline#color_template = 'insert'
+"let airline#extensions#tmuxline#color_template = 'visual'
+"let airline#extensions#tmuxline#color_template = 'replace'
+"let g:tmuxline_preset = {
+"  \'a'       : '#H',
+"  \'b'       : '#W',
+"  \'win'     : ['#I', '#W'],
+"  \'cwin'    : ['#I', '#W'],
+"  \'x'       : '%a',
+"  \'y'       : '%Y-%m-%d %H:%M',
+"  \'z'       : ['#F', '#P', '#S'],
+"  \'options' : {'status-justify' : 'left'}}
+
+"let g:tmuxline_theme = tmuxline#themes#zenburn#get()
 
 " session autosave_and_restore with function below
 let g:session_autoload = 'no'
@@ -524,6 +612,13 @@ function IanXGetProjectName()
     return g:ianX_session_name
 endfunction
 
+function IanXAutoSaveSession()
+    if exists('g:ianX_session_skip_autosave') && g:ianX_session_skip_autosave != 0
+        return
+    endif
+    call IanXSaveSession()
+endfunction
+
 function IanXSaveSession()
     "NERDTree doesn't support session, so close before saving
     "execute ':NERDTreeClose'
@@ -535,9 +630,6 @@ function IanXSaveSession()
 endfunction
 
 function IanXRestoreSession()
-    if exists('g:ianX_session_skip_autosave') && g:ianX_session_skip_autosave != 0
-        return
-    endif
     if exists('g:ianX_session_loaded') && g:ianX_session_loaded != 0
         return
     endif
@@ -563,7 +655,7 @@ endfunction
 
 nmap ssa :call IanXSaveSession()
 smap SO :call IanXRestoreSession()
-autocmd VimLeave * call IanXSaveSession()
+autocmd VimLeave * call IanXAutoSaveSession()
 autocmd VimEnter * call IanXRestoreSession()
 
 function IanXDebugStart()

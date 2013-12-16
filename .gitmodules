@@ -102,3 +102,33 @@
     path = bundle/vim-less
     url = https://github.com/groenewege/vim-less.git
     ignore = dirty
+
+[submodule "bundle/syntastic"]
+    path = bundle/syntastic
+    url = https://github.com/scrooloose/syntastic.git
+    ignore = dirty
+
+[submodule "bundle/tagbar"]
+    path = bundle/tagbar
+    url = https://github.com/majutsushi/tagbar.git
+    ignore = dirty
+
+[submodule "bundle/tmuxline.vim"]
+    path = bundle/tmuxline.vim
+    url = https://github.com/edkolev/tmuxline.vim.git
+    ignore = dirty
+
+[submodule "bundle/vim-airline"]
+    path = bundle/vim-airline
+    url = https://github.com/bling/vim-airline.git
+    ignore = dirty
+
+[submodule "bundle/vim-bufferline"]
+    path = bundle/vim-bufferline
+    url = https://github.com/bling/vim-bufferline.git
+    ignore = dirty
+
+[submodule "bundle/vim-css-color"]
+    path = bundle/vim-css-color
+    url = https://github.com/ap/vim-css-color.git
+    ignore = dirty
