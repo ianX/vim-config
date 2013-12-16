@@ -3,6 +3,8 @@ let g:vimrc_iswindows=0
 
 " vundle
 set nocompatible
+" I DON'T KONW WHICH PLUGIN WILL DO WHAT NEXT
+let g:ianX_session_curdir = getcwd()
 filetype on
 filetype off  " required!
 set rtp+=~/.vim/bundle/vundle/
@@ -516,10 +518,10 @@ function IanXGetProjectName()
     if len(edit_files) >= 2 && edit_files[1] != '.'
         let project_path = edit_files[1]
         if project_path[0] != '/'
-            let project_path = getcwd(). '/'. project_path
+            let project_path = g:ianX_session_curdir. '/'. project_path
         endif
     else
-        let project_path = getcwd()
+        let project_path = g:ianX_session_curdir
     endif
     let g:ianX_session_name = substitute(project_path, '[/]', '_', 'g')
     return g:ianX_session_name
