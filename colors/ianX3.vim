@@ -21,7 +21,6 @@ let colors_name = "ianX3"
 "
 " First list all groups common to both 'light' and 'dark' background.
 "
-
 " `:he highlight-groups`
 hi DiffAdd      guibg=MediumSeaGreen
 hi Directory    guifg=#1600FF
@@ -130,4 +129,5 @@ if has("gui_macvim") && !exists("s:augroups_defined")
   let s:augroups_defined = 1
 endif
 
+hi Cursor gui=reverse guifg=NONE guibg=NONE " highlight Cursor
 " vim: sw=2

@@ -3,6 +3,7 @@ let g:vimrc_iswindows=0
 
 " vundle
 set nocompatible
+filetype on
 filetype off  " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -28,12 +29,19 @@ Bundle 'honza/vim-snippets'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
+" FE:
 Bundle 'tpope/vim-haml'
+Bundle 'othree/html5.vim'
+Bundle 'pangloss/vim-javascript'
+Bundle 'leshill/vim-json'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'groenewege/vim-less'
+"Bundle 'ap/vim-css-color'
+Bundle 'chrisbra/color_highlight'
 
-filetype on  " after Bundle init
-filetype plugin on
-filetype indent on " required
 syntax on
+filetype on  " after Bundle init
+filetype plugin indent on
 set background=dark
 
 set cindent
@@ -66,6 +74,7 @@ set backspace=indent,eol,start "退格键和del键可以删除回车
 set lazyredraw
 set autochdir
 set guioptions= " 不显示滚动条
+set history=100
 
 "选择模式
 set keymodel=startsel,stopsel
@@ -87,6 +96,7 @@ set noerrorbells "去掉错误提示音
 set novisualbell
 set vb t_vb=
 
+set t_Co=256
 "语法折叠
 set foldenable
 set foldmethod=syntax
