@@ -594,7 +594,7 @@ let g:ianX_session_loaded = 0
 let g:ianX_session_name = ''
 let g:ianX_session_skip_autosave = 0
 " Auto Session Save/Restore
-function IanXGetProjectName()
+function! IanXGetProjectName()
     " Get the current editing file list, Unix only
     if exists('g:ianX_session_name') && g:ianX_session_name != ''
         return g:ianX_session_name
@@ -612,14 +612,14 @@ function IanXGetProjectName()
     return g:ianX_session_name
 endfunction
 
-function IanXAutoSaveSession()
+function! IanXAutoSaveSession()
     if exists('g:ianX_session_skip_autosave') && g:ianX_session_skip_autosave != 0
         return
     endif
     call IanXSaveSession()
 endfunction
 
-function IanXSaveSession()
+function! IanXSaveSession()
     "NERDTree doesn't support session, so close before saving
     "execute ':NERDTreeClose'
     let session_name = IanXGetProjectName()
@@ -629,7 +629,7 @@ function IanXSaveSession()
     "execute 'SaveSession '. IanXGetProjectName()
 endfunction
 
-function IanXRestoreSession()
+function! IanXRestoreSession()
     if exists('g:ianX_session_loaded') && g:ianX_session_loaded != 0
         return
     endif
@@ -644,10 +644,22 @@ function IanXRestoreSession()
     let g:ianX_session_loaded = 1
 endfunction
 
-function IanXDelCurSession()
+function! IanXDelCurSession()
     let session_path = expand(g:session_directory. '/'. IanXGetProjectName(). '.vim')
     if filereadable(session_path)
-        system('rm -f '. session_path)
+        call system('rm -f '. session_path)
+    endif
+    let g:ianX_session_skip_autosave = 1
+    echo
+endfunction
+
+function! IanXDelAllSession()
+    if !exists('g:session_directory')
+        return
+    endif
+    let session_dir = expand(g:session_directory)
+    if isdirectory(session_dir)
+        call system('rm -f '. session_dir. '/*')
     endif
     let g:ianX_session_skip_autosave = 1
     echo
@@ -658,13 +670,13 @@ smap SO :call IanXRestoreSession()
 autocmd VimLeave * call IanXAutoSaveSession()
 autocmd VimEnter * call IanXRestoreSession()
 
-function IanXDebugStart()
+function! IanXDebugStart()
     execute 'profile start '. expand('~/.vim/tmp'). '/profile.log'
     execute 'profile func *'
     execute 'profile file *'
 endfun
 
-function IanXDebugStop()
+function! IanXDebugStop()
     execute 'profile pause'
 endfunction
 
