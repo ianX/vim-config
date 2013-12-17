@@ -18,6 +18,8 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 "Bundle 'xolox/vim-misc'
 "Bundle 'xolox/vim-session'
+" Improved PHP omni-completion. Based on the default phpcomplete.vim.
+"Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'L9'
 "Bundle 'AutoComplPop' " disable acp
 Bundle 'Shougo/neocomplete.vim'
